@@ -5,6 +5,8 @@
  */
 package connectfour;
 
+import java.util.Random;
+
 /**
  *
  * @author kiaka
@@ -17,6 +19,9 @@ public class ConnectFour {
     public static void main(String[] args) {
          gameBoard = createBoard('b');
          printBoard();
+         playGame(gameBoard);
+         printBoard();
+         
          
          
          }
@@ -38,4 +43,38 @@ public class ConnectFour {
                 System.out.println();
          }
     }
+        private static void takeTurn(char currentPlayer){
+            Random rand = new Random();
+            int col = rand.nextInt(7);
+            int row = 5;
+            
+            while(true){
+                if(gameBoard[row][col]== 'b'){ ///empty spot, place in gameBoard
+                    gameBoard[row][col] = currentPlayer;
+                    break; // broke out of loop
+                } else if(row == 0){ //checks to see if column is full
+                    col = rand.nextInt(7); 
+                } else { // goes to the next row 'up'
+                    row--;
+                }
+            }
+        }
+        private static char playGame(char[][] gameBoard){
+                //takeTurn('y');
+                printBoard();
+                int i = 10;
+            while(i > 0){
+                if(i%2 == 0){
+                    takeTurn('y');
+            } else{
+                    takeTurn('r');
+                
+             i--;
+                }
+           }
+            return 't';
+            
+        }
+                    
 }
+
